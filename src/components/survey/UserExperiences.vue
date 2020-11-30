@@ -3,9 +3,7 @@
     <base-card>
       <h2>Submitted Experiences</h2>
       <div>
-        <base-button @click="loadExpirience"
-          >Load Submitted Experiences</base-button
-        >
+        <base-button @click="loadExpirience">Load Submitted Experiences</base-button>
       </div>
       <ul>
         <survey-result
@@ -52,6 +50,9 @@ export default {
           this.results = results;
         });
     },
+  },
+  mounted() {
+    this.loadExpirience();
   },
 };
 </script>

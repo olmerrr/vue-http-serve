@@ -1,7 +1,7 @@
 <template>
   <li>
     <p>
-      <span class="highlight">{{ name }}</span> rated the learning experience
+      <span class="highlight">{{ name }} </span> rated the learning experience
       <span :class="ratingClass">{{ rating }}</span>.
     </p>
   </li>

@@ -66,7 +66,10 @@ export default {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({userName: this.enteredName,rating: this.chosenRating})
+        body: JSON.stringify({
+          name: this.enteredName,
+          rating: this.chosenRating,
+        })
       });
 
       this.enteredName = '';
