@@ -28,7 +28,8 @@
         </div>
         <p
           v-if="invalidInput"
-        >One or more input fields are invalid. Please check your provided data.</p>
+        >One or more inputa fields are invalid. Please check your provided data.</p>
+        <p v-if="isError">{{ isError }}</p>
         <div>
           <base-button>Submit</base-button>
         </div>
@@ -44,6 +45,7 @@ export default {
       enteredName: '',
       chosenRating: null,
       invalidInput: false,
+      isError: null,
     };
   },
   // emits: ['survey-submit'],
@@ -60,8 +62,8 @@ export default {
       //   rating: this.chosenRating,
       // });
     
-    
-      fetch('https://vue-http-demo-48c31.firebaseio.com/surveys.json', {
+      this.isError = null;
+      fetch('https://vue-http-demo-48c31.firebaseio.com/surveys', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -69,8 +71,12 @@ export default {
         body: JSON.stringify({
           name: this.enteredName,
           rating: this.chosenRating,
-        })
-      });
+        }),
+      })
+      .catch(error => {
+        console.log(error);
+        this.isError = 'Something went wrong - try again later'; 
+      })
 
       this.enteredName = '';
       this.chosenRating = null;
