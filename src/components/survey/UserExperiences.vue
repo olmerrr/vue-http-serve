@@ -6,7 +6,9 @@
         <base-button @click="loadExpirience">Load Submitted Experiences</base-button>
       </div>
       <p v-if="isLoading">Loading...</p>
-      <ul v-else>
+      <p v-else-if="!isLoading && (!results || results.length === 0)">No stored experiences found. Start adding some survey results first</p>
+
+      <ul v-else-if="!isLoading && results && results.length > 0">
         <survey-result
           v-for="result in results"
           :key="result.id"
@@ -35,6 +37,7 @@ export default {
   methods: {
     loadExpirience() {
     this.isLoading = true;
+    //GET req default
     fetch('https://vue-http-demo-48c31.firebaseio.com/surveys.json')
         .then((responce) =>{
           if (responce.ok) {
