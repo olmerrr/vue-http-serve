@@ -63,19 +63,27 @@ export default {
       // });
     
       this.isError = null;
-      fetch('https://vue-http-demo-48c31.firebaseio.com/surveys', {
+      fetch('https://vue-http-demo-48c31.firebaseio.com/surveys.json', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
+        body: {
           name: this.enteredName,
           rating: this.chosenRating,
-        }),
+        },
+      })
+      .then(responce => {
+        if(responce.ok){
+          console.log('ok..')
+        } else {
+          throw new Error('Could not save data!');
+        }
       })
       .catch(error => {
-        console.log(error);
         this.isError = 'Something went wrong - try again later'; 
+        console.log(error.message);
+
       })
 
       this.enteredName = '';
